@@ -9,6 +9,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - **Initial config package** for the Kiro wayfire edition — the 3D-effects member of the KIROTUX
   Wayland line. wayfire (wlroots) compositor with the same waybar + mako + swaybg shell as
   kiro-hyprland, so the look and feel match the Hyprland edition.
+- **Fixed waybar appearing ~25s late at login** — the `[autostart]` panel entry now launches
+  `env GTK_A11Y=none waybar`, skipping the at-spi accessibility bus that stalled the GTK bar before
+  it painted (same fix applied across the Wayland line; first found on kiro-river).
 - **pywal theming.** One wallpaper drives every colour: `set-theme.sh` runs pywal at login and
   fans the palette out to waybar, mako, and the wayfire window borders, then live-reloads each.
 - **3D effects as the signature**, at zero package cost — cube/expo/wobbly/wrot/zoom/fisheye/
