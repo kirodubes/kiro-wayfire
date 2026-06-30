@@ -1,0 +1,37 @@
+/* Colours come from colors.css (pywal-generated; Tokyo Night fallback). */
+@import "colors.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @bg;
+  color: @fg;
+}
+
+#taskbar button {
+  padding: 0 6px;
+  margin: 2px 1px;
+}
+#taskbar button.active {
+  background: @accent;
+  border-radius: 6px;
+}
+
+#clock, #pulseaudio, #network, #cpu, #memory, #battery, #tray {
+  padding: 0 10px;
+  margin: 4px 2px;
+}
+
+#clock     { color: @accent; font-weight: bold; }
+#pulseaudio{ color: @accent2; }
+#network   { color: @info; }
+#cpu       { color: @good; }
+#memory    { color: @warn; }
+#battery.warning  { color: @warn; }
+#battery.critical { color: @crit; }
