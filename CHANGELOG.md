@@ -3,6 +3,26 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.07.01
+
+### What Changed
+- **Added Variety wallpaper-rotator autostart + keybinds.** `variety` (configured by
+  `kiro-variety-config`) now autostarts alongside the existing static `swaybg` wallpaper. Ported
+  the ohmychadwm `keybindings.txt` scheme (alt+N/P/T/F/arrows/Up/Down/W): next/previous/trash/
+  favorite/pause/resume/selector, plus alt+shift+N/P/T/F/U combos that also trigger this edition's
+  `set-theme.sh` pywal recolor (waybar/mako/`wayfire.ini` colour lines — live-reloaded since
+  wayfire watches its own config file). `variety` + `kiro-variety-config` added to `depends=()`.
+
+### Technical Details
+- Verified no existing `<alt>` binds collided with the new letters/arrows before adding (`KEY_N`/
+  `KEY_P`/`KEY_T`/`KEY_F`/`KEY_W`/arrows were only bound with `<super>`, `<super><ctrl>`, or
+  `<ctrl><alt>`, all different chords).
+
+### Files Modified
+- [etc/skel/.config/wayfire.ini](etc/skel/.config/wayfire.ini)
+- [etc/skel/.config/wayfire/keybindings.txt](etc/skel/.config/wayfire/keybindings.txt)
+- [../KIROTUX-PKG-BUILD/kiro-wayfire/PKGBUILD](../KIROTUX-PKG-BUILD/kiro-wayfire/PKGBUILD)
+
 ## 2026.06.30
 
 ### What Changed

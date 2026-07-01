@@ -98,6 +98,22 @@
   XF86MonBrightnessUp     Brightness up
   XF86MonBrightnessDown   Brightness down
 
+── 6b. Wallpaper (Variety) ────────────────────────────────────────────────────
+  alt + N                 Next wallpaper
+  alt + Right             Next wallpaper
+  alt + P                 Previous wallpaper
+  alt + Left              Previous wallpaper
+  alt + T                 Trash wallpaper
+  alt + F                 Favorite wallpaper
+  alt + Up                Pause wallpaper
+  alt + Down              Resume wallpaper
+  alt + W                 Wallpaper selector
+  alt + shift + N         Next wallpaper + pywal recolor
+  alt + shift + P         Previous wallpaper + pywal recolor
+  alt + shift + T         Trash wallpaper + pywal recolor
+  alt + shift + F         Favorite wallpaper + pywal recolor
+  alt + shift + U         Pywal recolor from current wallpaper
+
 ── 7. Screenshots ─────────────────────────────────────────────────────────────
   Print                   Screenshot region
   super + Print           Screenshot screen
