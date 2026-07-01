@@ -11,9 +11,9 @@
   ctrl + alt + T          Terminal
   super + shift + Return  File manager
   super + E               Code editor
-  super + D               Launch apps
-  super + Space           Launch apps
-  super + shift + D       Run launcher
+  super + D               Launch apps (fuzzel)
+  super + Space           Launch apps (fuzzel)
+  super + shift + D       Run launcher (rofi)
   super + R               Theme selector
   alt + R                 Theme selector
   super + V               Volume control
@@ -47,8 +47,8 @@
   super + F8              File manager
   super + F9              Virt-manager
   super + F10             Spotify
-  super + F11             Rofi drun
-  super + F12             Rofi drun
+  super + F11             Launch apps (fuzzel)
+  super + F12             Launch apps (fuzzel)
 
 ── 2. Window Management ───────────────────────────────────────────────────────
   super + Q               Close window

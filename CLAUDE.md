@@ -12,6 +12,15 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   launchers; window management lives in the plugin sections.
 - **Desktop shell:** **waybar + mako + swaybg** — the same stack as kiro-hyprland (wayfire is
   wlroots, so it ports almost directly). This is the deliberate "re-converge the line" choice.
+- **Launchers: fuzzel (keyboard) + nwg-drawer (visual grid), not plain rofi.** `SUPER+D`/`SUPER+
+  Space`/`SUPER+F11`/`F12` open **fuzzel** (fast, Wayland-native, themed Tokyo Night — found via
+  community precedent in multiple `~/Public` niri/sway/river rices, not just wayfire). The waybar
+  top-left icon (`` U+F0BAF, nf-md-apps) opens **nwg-drawer** via
+  `~/.config/wayfire/scripts/app-drawer.sh` — a 5-column, 96px-icon, Surfn-themed app grid sized
+  to the center 60%×70% of the *actual* output resolution (computed at runtime from `wlr-randr`,
+  not hardcoded — the values were tuned live on a 1920x1080 display but the script scales).
+  `rofi` stays for `SUPER+SHIFT+D` (run launcher) and `SUPER+R`/`ALT+R` (theme selector) — no
+  fuzzel/nwg-drawer equivalent for those.
 - **Autostart:** wayfire's `[autostart]` table (`name = command`, run via `/bin/sh -c` — pipes &
   `[ ]` work, unlike Hyprland's exec_cmd). `autostart_wf_shell = false` so wf-panel doesn't fight
   waybar. XDG-autostart-only items (`xdg-user-dirs-update`) added by hand.
@@ -30,8 +39,8 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   vocabulary (`simple-tile` focus, `grid` snap, `vswitch` workspaces, `wm-actions`) — **not** a
   1:1 copy of Hyprland's dispatchers (no master/dwindle/groups/scratchpad in wayfire).
 - `etc/skel/.config/wayfire/keybindings.txt` mirrors `wayfire.ini` — keep them in lockstep; a
-  duplicate-chord scan must pass. (`kiro-keybindings` / `/kiro-create-keybindings` still need
-  **wayfire** added to their WM-detection table — known gap, same one Hyprland and niri hit.)
+  duplicate-chord scan must pass. `kiro-keybindings`'s `WM_MAP` already includes `wayfire`
+  (fixed 2026-07-01, along with the other five KIROTUX Wayland editions missing at the time).
 
 ## Patterns / gotchas
 - **wayfire colours are float-RGBA** (`r g b a`, 0–1), not hex — `set-theme.sh` converts.
@@ -41,8 +50,13 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   surfaced by the expo overview (tap SUPER) + SUPER+1..9. A custom IPC workspace module is a
   documented future enhancement.
 - **cube is loaded but bound to CTRL+ALT+drag** — a showcase, not the everyday switcher (vswitch).
-- `wayfire.ini` not yet validated on a real wayfire boot — verify on a real session before/at the
-  first ISO test (same caveat niri carried).
+- **Validated on a real wayfire boot** (picard, real-metal, 2026-07-01): installed via `pacman`,
+  confirmed waybar/`wlr/taskbar` render correctly, fuzzel and nwg-drawer both launch and theme
+  correctly. (The one issue hit — no workspace pills in waybar — was expected/by-design, not a
+  bug; see the "No native waybar workspace module" note below.)
+- `nwg-drawer`'s window content sits in an unnamed inner GTK box (`win.Add(outerVBox)` in its
+  source, no `#id`), so `window { padding: ... }` in `drawer.css` is silently ignored by GTK3 —
+  target `window > box` instead for inner padding.
 
 ## Build / delivery
 - Source-of-truth for the config; delivered as the `kiro-wayfire` package via

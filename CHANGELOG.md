@@ -12,15 +12,34 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   favorite/pause/resume/selector, plus alt+shift+N/P/T/F/U combos that also trigger this edition's
   `set-theme.sh` pywal recolor (waybar/mako/`wayfire.ini` colour lines — live-reloaded since
   wayfire watches its own config file). `variety` + `kiro-variety-config` added to `depends=()`.
+- **Swapped `rofi -show drun` for fuzzel (SUPER+D/Space/F11/F12) + added an nwg-drawer app-grid
+  icon to waybar.** Found via community precedent across independent niri/sway/river rices in
+  `~/Public` — fuzzel is Wayland-native (`wlr-layer-shell`), themeable, and works on niri despite
+  targeting "wlroots" compositors by description. Evaluated live on picard (real-metal) before
+  committing: theme, sizing, and the waybar icon were all tuned interactively on a running wayfire
+  session first. `rofi` stays for `SUPER+SHIFT+D` (run mode) and the theme selector — no
+  fuzzel/nwg-drawer equivalent for those. `fuzzel` + `nwg-drawer` added to `depends=()`.
 
 ### Technical Details
 - Verified no existing `<alt>` binds collided with the new letters/arrows before adding (`KEY_N`/
   `KEY_P`/`KEY_T`/`KEY_F`/`KEY_W`/arrows were only bound with `<super>`, `<super><ctrl>`, or
   `<ctrl><alt>`, all different chords).
+- The waybar launcher icon runs `~/.config/wayfire/scripts/app-drawer.sh`, not a raw `nwg-drawer`
+  command — nwg-drawer's `-ml/-mr/-mt/-mb` margins are pixel values, so a fixed number only looks
+  right at the resolution it was tuned on. The script parses `wlr-randr`'s current mode and
+  computes margins as 20%/15% of width/height, reproducing the exact pixel values tuned live on a
+  1920x1080 display (384/162) while scaling correctly on any other resolution.
+- `drawer.css`: `window { padding: ... }` is silently ignored by GTK3 (nwg-drawer's content sits
+  in an unnamed inner box, no `#id` to target) — used `window > box` instead.
 
 ### Files Modified
 - [etc/skel/.config/wayfire.ini](etc/skel/.config/wayfire.ini)
 - [etc/skel/.config/wayfire/keybindings.txt](etc/skel/.config/wayfire/keybindings.txt)
+- [etc/skel/.config/wayfire/scripts/app-drawer.sh](etc/skel/.config/wayfire/scripts/app-drawer.sh) (new)
+- [etc/skel/.config/waybar/config-wayfire.jsonc](etc/skel/.config/waybar/config-wayfire.jsonc)
+- [etc/skel/.config/fuzzel/fuzzel.ini](etc/skel/.config/fuzzel/fuzzel.ini) (new)
+- [etc/skel/.config/nwg-drawer/drawer.css](etc/skel/.config/nwg-drawer/drawer.css) (new)
+- [CLAUDE.md](CLAUDE.md)
 - [../KIROTUX-PKG-BUILD/kiro-wayfire/PKGBUILD](../KIROTUX-PKG-BUILD/kiro-wayfire/PKGBUILD)
 
 ## 2026.06.30

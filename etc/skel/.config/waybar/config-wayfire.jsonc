@@ -1,15 +1,22 @@
 {
   // Kiro wayfire bar — same layout/feel as kiro-hyprland. wayfire has no native
-  // waybar workspace module, so the left side uses wlr/taskbar (running windows);
-  // workspaces are driven by wayfire's expo overview (tap SUPER) + SUPER+1..9.
+  // waybar workspace module, so the center of the left side uses wlr/taskbar
+  // (running windows); workspaces are driven by wayfire's expo overview (tap
+  // SUPER) + SUPER+1..9. The app-drawer icon opens nwg-drawer (big icon grid) —
+  // a visual complement to fuzzel (SUPER+D), which stays the fast keyboard launcher.
   "layer": "top",
   "position": "top",
   "height": 24,
   "spacing": 6,
-  "modules-left": ["wlr/taskbar"],
+  "modules-left": ["custom/launcher", "wlr/taskbar"],
   "modules-center": ["clock"],
   "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
 
+  "custom/launcher": {
+    "format": " 󰮯 ",
+    "tooltip-format": "Applications",
+    "on-click": "~/.config/wayfire/scripts/app-drawer.sh"
+  },
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 16,
