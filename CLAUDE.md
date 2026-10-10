@@ -60,6 +60,6 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
 
 ## Build / delivery
 - Source-of-truth for the config; delivered as the `kiro-wayfire` package via
-  `../KIROTUX-PKG-BUILD/kiro-wayfire/build.sh` (public recipe → `~/EDU/nemesis_repo/`). After
+  `~/KIRO-PKG-BUILD-APPS/kiro-wayfire/build.sh` (public recipe → `~/EDU/nemesis_repo/`). After
   editing here: rebuild the package (recipe `build.sh`), then the ISO to test a fresh install.
-- See [../CLAUDE.md](../CLAUDE.md) for the full KIROTUX delivery architecture.
+- See [KIROTUX/CLAUDE.md](../../KIROTUX/CLAUDE.md) for the full KIROTUX delivery architecture.
