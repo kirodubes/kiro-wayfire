@@ -9,8 +9,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - **The Alt+Shift keys work: layouts switch with both Ctrl keys now.** `xkb_options` had `grp:alt_shift_toggle`, so
   Alt+Shift switched the keyboard layout before wayfire saw the keys, and every Alt+Shift binding fell through to
   plain Alt: Alt+Shift+N changed the wallpaper (Alt+N) but never recoloured. The layout toggle is
-  `grp:ctrls_toggle` (left + right Ctrl together). Existing users get it at the next login (only the untouched shipped
-  line changes).
+  `grp:ctrls_toggle` (left + right Ctrl together). New installs get it. Existing users: change `grp:alt_shift_toggle`
+  to `grp:ctrls_toggle` in `~/.config/wayfire.ini` (or copy the new `keyboard-from-installer.sh` from `/etc/skel`,
+  which swaps the untouched line at login); the login scripts run from the user's own copy, which an update leaves alone.
 - **keybindings.txt checked against wayfire.ini**: the layout switch is listed; the cube keys are Ctrl+Alt+Left/Right
   (+ Ctrl+Alt+left-click), not Super+Ctrl+Alt; Ctrl+Alt+S is the Fish tweak tool; added Alt+F4, Super+Shift+Tab,
   Super+Ctrl+Shift+O, and window rotation (Super+Ctrl+right-click, Super+Ctrl+R). Every row parses for the premium
