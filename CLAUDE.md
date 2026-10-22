@@ -30,8 +30,14 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
 - **Lock/idle:** hyprlock + hypridle (wlroots-compatible), reusing kiro-hyprland's `hyprlock.conf`
   + the betterlockscreen blur cache. `session-lock` is in the plugin list so the protocol is live.
 - **Dependencies:** everything from Arch `extra` — **nothing into `nemesis_repo`**.
-  `wayfire-plugins-extra` is a free optdepend (chaotic-aur/cachyos). pixdecor (rounded corners)
+  `wayfire-plugins-extra` is left out (2026-10-22): wayfire 0.11 moved fisheye there, but chaotic-aur/cachyos still
+  ship its 0.10 build, which doesn't load on 0.11. pixdecor (rounded corners)
   deliberately skipped for v1 — wayfire's built-in `decoration` plugin is used (square corners).
+- **KiroTux premium contract:** Kirotux Wayfire Premium writes only its own keys into `wayfire.ini` and lists them in
+  `~/.config/wayfire/kirotux-appearance.ini`. Anything else that edits `wayfire.ini` (`set-theme.sh`,
+  `keyboard-from-installer.sh`) must skip a key listed there. hypridle runs the app's
+  `~/.config/kirotux-wayfire-premium/hypridle.conf` when present. wf-config: an unescaped `#` anywhere starts a
+  comment, so colours are written as floats (`r g b a`).
 
 ## Keybindings
 - SUPER grammar ported from kiro-hyprland: CTRL+ALT launchers + SUPER+F1..F12 + `kiro-keybindings`

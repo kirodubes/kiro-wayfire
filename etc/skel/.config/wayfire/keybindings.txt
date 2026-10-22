@@ -129,6 +129,5 @@
   ctrl + alt + R          Lockscreen wallpaper
   super + shift + R       Reload theme (waybar + mako)
   super + ctrl + alt + Left/Right   Cube — 3D workspace showcase
-  super + ctrl + F        Fisheye effect
   super + ctrl + I        Invert colours
   super + alt + B         Toggle blur

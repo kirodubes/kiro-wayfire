@@ -31,8 +31,16 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - It runs in the same autostart entry as `set-theme.sh`, before it: both rewrite `wayfire.ini`, and two writers
   at once could lose one edit.
 - Ctrl+Alt+H calls `scripts/premium.sh` instead of an inline `sh -c`, because of the quoting in a `.ini` value.
-- The premium app's record file is `~/.config/wayfire/kirotux-appearance.ini`; `set-theme.sh` skips its
-  `wayfire.ini` block while that file exists (waybar and mako still follow pywal).
+- The premium app's record file is `~/.config/wayfire/kirotux-appearance.ini`, an INI of the keys the app owns.
+  `set-theme.sh` skips only those keys (e.g. `active_color`), so pywal keeps theming every colour the user didn't
+  set in the app; `keyboard-from-installer.sh` stops when `xkb_layout` is listed, so a `us,be` picked in the app is
+  never taken for the shipped default.
+- hypridle starts with `-c ~/.config/kirotux-wayfire-premium/hypridle.conf` when the premium app saved its own
+  timeouts; otherwise the shared `hypridle.conf` from kiro-wayland-dotfiles, untouched.
+- **wlsunset** moves from optdepends to depends: the premium app's Night light page drives it.
+- **Fisheye removed** (the `[fisheye]` section, Super+Ctrl+F in `keybindings.txt`, and the `wayfire-plugins-extra`
+  optdepend). wayfire 0.11 moved fisheye out of core into `wayfire-plugins-extra`, and chaotic-aur/cachyos still
+  carry its 0.10 build, which doesn't load on 0.11, so the key did nothing.
 - Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
   and this edition uses wayfire's own session, so there is no wrapper to export them from.
 
@@ -43,6 +51,8 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - `etc/skel/.config/wayfire/scripts/set-theme.sh`
 - `etc/skel/.config/wayfire/scripts/keyboard-from-installer.sh` (new)
 - `etc/skel/.config/wayfire/scripts/premium.sh` (new)
+- `CLAUDE.md`
+- `KIRO-PKG-BUILD-APPS/kiro-wayfire/PKGBUILD` (wlsunset depends, plugins-extra optdepend dropped)
 
 ## 2026.10.10
 

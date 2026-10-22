@@ -25,6 +25,8 @@ DEFAULT='xkb_layout = us,be'
 
 [ -f "$INI" ] || exit 0
 [ -r /etc/vconsole.conf ] || exit 0
+# The layout was picked in Kirotux Wayfire Premium (its record file lists the key): that choice wins, even us,be.
+grep -q '^xkb_layout = ' "$HOME/.config/wayfire/kirotux-appearance.ini" 2>/dev/null && exit 0
 
 layout=$(sed -n 's/^XKBLAYOUT="\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' /etc/vconsole.conf | head -n1)
 variant=$(sed -n 's/^XKBVARIANT="\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' /etc/vconsole.conf | head -n1)

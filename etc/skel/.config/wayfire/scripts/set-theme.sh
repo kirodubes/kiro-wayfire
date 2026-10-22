@@ -64,18 +64,22 @@ if [ -f "$MAKO_CONFIG" ]; then
 fi
 
 # ── wayfire.ini — borders + workspace/cube/expo backgrounds (auto-reloads) ────
-# Skipped once Kirotux Wayfire Premium has saved a look (its record file exists): the
-# app owns these colours then, and pywal would undo them at every login.
-if [ -f "$WAYFIRE_INI" ] && [ ! -f "$HOME/.config/wayfire/kirotux-appearance.ini" ]; then
+# A key Kirotux Wayfire Premium owns (listed in its record file) is skipped: the app
+# set that colour, and pywal would undo it at every login.
+RECORD="$HOME/.config/wayfire/kirotux-appearance.ini"
+app_owns() {
+    [ -f "$RECORD" ] && grep -q "^$1 = " "$RECORD"
+}
+if [ -f "$WAYFIRE_INI" ]; then
     accent_f="$(hex2float "$color4")"
     muted_f="$(hex2float "$color8")"
     bg_f="$(hex2float "$background")"
-    sed -i \
-        -e "s|^active_color = .*|active_color = ${accent_f} 1.0|" \
-        -e "s|^inactive_color = .*|inactive_color = ${muted_f} 0.667|" \
-        -e "s|^background_color = .*|background_color = ${bg_f} 1.0|" \
-        -e "s|^background = .*|background = ${bg_f} 1.0|" \
-        "$WAYFIRE_INI"
+    edits=()
+    app_owns active_color     || edits+=(-e "s|^active_color = .*|active_color = ${accent_f} 1.0|")
+    app_owns inactive_color   || edits+=(-e "s|^inactive_color = .*|inactive_color = ${muted_f} 0.667|")
+    app_owns background_color || edits+=(-e "s|^background_color = .*|background_color = ${bg_f} 1.0|")
+    app_owns background       || edits+=(-e "s|^background = .*|background = ${bg_f} 1.0|")
+    [ "${#edits[@]}" -gt 0 ] && sed -i "${edits[@]}" "$WAYFIRE_INI"
 fi
 
 # ── Reload the live surfaces ──────────────────────────────────────────────────
