@@ -6,6 +6,13 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.10.22
 
 ### What Changed
+- **Variety + recolour works on every wallpaper, with the right colours.** Two fixes, found on two real machines:
+  - The theme now uses **pywal16** (`python-pywal16`), the maintained fork of pywal. The old pywal 3.3 (archived
+    upstream) gave up on flat wallpapers with few colours and then nothing was recoloured (about 1 in 25 Variety
+    wallpapers). pywal16 recoloured all 40 test wallpapers and the failing one; `set-theme.sh` is unchanged.
+  - Alt+Shift+N, Alt+Shift+P, Alt+Shift+T and Alt+Shift+F wait 3 seconds instead of 1 before asking Variety for the
+    new wallpaper: after 1 second Variety could still report the previous one, so the colours lagged one wallpaper
+    behind. New installs only; existing users can change `sleep 1` to `sleep 3` in their `~/.config/wayfire.ini`.
 - **The terminal follows the wallpaper's colours too.** pywal recoloured waybar, mako and the borders, but Alacritty
   kept its built-in colours: pywal 3.3 has no Alacritty template and the edition ships no Alacritty config.
   `set-theme.sh` now writes the palette to `~/.cache/wal/colors-alacritty.toml`, and when you have no
@@ -44,6 +51,13 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   which the Hyprland editions already set). Real hardware is unchanged. This one reaches existing installs too.
 
 ### Technical Details
+- pywal 3.3's imagemagick backend needs 16 distinct colours and exits 1 when it can't find them; `set-theme.sh` runs
+  under `set -e`, so it stopped before waybar, Alacritty and the borders. The package's dependency moves to
+  `python-pywal16` (built from its AUR recipe into nemesis_repo). It
+  `provides`/`conflicts` `python-pywal`, so an update replaces the old package. Tested on two bare-metal installs
+  (RTX 2060 + HD 630, and HD 630): 0 of 20 random Variety wallpapers failed on each, open Alacritty windows recolour
+  live (fastfetch output included). The `sleep 3` was checked on both: with `sleep 1` one box still got the old
+  wallpaper from `variety --get`.
 - `keyboard-from-installer.sh` only replaces the untouched line `xkb_layout = us,be` and adds `xkb_variant` when
   the installer set one; no stamp, so it works again after `skell`. Tested on a copy with `XKBLAYOUT="de"` +
   `XKBVARIANT="nodeadkeys"`, and a second run changes nothing.
