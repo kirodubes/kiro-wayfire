@@ -1,0 +1,20 @@
+#!/bin/sh
+#####################################################################
+# Author    : Erik Dubois
+# Website   : https://kiroproject.be
+#####################################################################
+#   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
+#
+# Purpose:
+#   Hide upstream wayfire's plain session so only "Kiro Wayfire" is offered in the display manager.
+#   Stamps NoDisplay=true onto wayfire.desktop (owned by the wayfire package) when not already present.
+# Why:
+#   The plain "Wayfire" entry starts wayfire without the Qt variables kiro-wayfire-session exports, so
+#   Qt apps lose the Kvantum look and their tray icons. A pacman hook re-runs this after every wayfire
+#   upgrade (which restores the file), so it cannot regress.
+#####################################################################
+
+desktop=/usr/share/wayland-sessions/wayfire.desktop
+[ -f "$desktop" ] || exit 0
+grep -q '^NoDisplay=true$' "$desktop" && exit 0
+printf 'NoDisplay=true\n' >> "$desktop"

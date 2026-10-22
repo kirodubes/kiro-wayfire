@@ -6,6 +6,13 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.10.22
 
 ### What Changed
+- **Own session "Kiro Wayfire" with the Qt variables.** Qt apps now get `QT_QPA_PLATFORMTHEME=gtk3` (tray icons, file
+  dialogs) and `QT_STYLE_OVERRIDE=kvantum` (the KvGnomeDark look), like every other edition. wayfire.ini can't set
+  environment variables, so a small wrapper, `kiro-wayfire-session`, exports them and starts wayfire with the same
+  `~/.config/wayfire.ini`. Upstream's plain "Wayfire" entry is hidden at the login screen, and a user whose last
+  session was the plain one is moved to "Kiro Wayfire" on update, so nobody lands in another session.
+- **nwg-drawer dropped**: the app grid is rofi Kiro-Grid since today, so the dependency and its skel folder go
+  (−41 MiB on the ISO). Existing users keep their old `~/.config/nwg-drawer/`, unused.
 - **Ready for the KiroTux Wayfire ISO**: the fixes the other KiroTux editions got while becoming a product.
 - **The keyboard layout follows the installer.** `xkb_layout = us,be` was fixed, so a user who picked German in
   Calamares still typed US/Belgian. At login a new script puts the installer's layout (and variant) from

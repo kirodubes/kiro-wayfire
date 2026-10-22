@@ -55,12 +55,17 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   documented future enhancement.
 - **cube is loaded but bound to CTRL+ALT+drag** — a showcase, not the everyday switcher (vswitch).
 - **Validated on a real wayfire boot** (picard, real-metal, 2026-07-01): installed via `pacman`,
-  confirmed waybar/`wlr/taskbar` render correctly, fuzzel and nwg-drawer both launch and theme
-  correctly. (The one issue hit — no workspace pills in waybar — was expected/by-design, not a
-  bug; see the "No native waybar workspace module" note below.)
-- `nwg-drawer`'s window content sits in an unnamed inner GTK box (`win.Add(outerVBox)` in its
-  source, no `#id`), so `window { padding: ... }` in `drawer.css` is silently ignored by GTK3 —
-  target `window > box` instead for inner padding.
+  confirmed waybar/`wlr/taskbar` render correctly, fuzzel launches and themes correctly. (The one
+  issue hit — no workspace pills in waybar — was expected/by-design, not a bug; see the "No native
+  waybar workspace module" note below.)
+- **nwg-drawer is gone** (2026-10-22): the app grid is rofi Kiro-Grid, so the dependency and the
+  `~/.config/nwg-drawer/` skel folder were dropped (−41 MiB on the ISO).
+- **Own session** (2026-10-22): `kiro-wayfire.desktop` ("Kiro Wayfire") runs `/usr/bin/kiro-wayfire-session`, which
+  exports `QT_QPA_PLATFORMTHEME=gtk3` + `QT_STYLE_OVERRIDE=kvantum` and execs wayfire (same `~/.config/wayfire.ini`).
+  The hide helper + pacman hook stamp `NoDisplay=true` on upstream `wayfire.desktop`; `kiro-wayfire.install` applies
+  it on install and moves SDDM's remembered session (`/var/lib/sddm/state.conf`) from `wayfire.desktop` to
+  `kiro-wayfire.desktop`, so existing users don't fall into another session. Calamares maps
+  `/usr/bin/kiro-wayfire-session` → `kiro-wayfire` (kirotux-calamares-config).
 
 - **VM cursor:** `etc/profile.d/kiro-wayfire-vm-cursor.sh` sets `WLR_NO_HARDWARE_CURSORS=1` for wayfire in a
   VM only. Without it, QEMU virtio-gpu draws the pointer away from where clicks land (Calamares unclickable).

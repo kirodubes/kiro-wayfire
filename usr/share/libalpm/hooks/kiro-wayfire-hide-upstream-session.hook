@@ -1,0 +1,13 @@
+# Re-hide upstream wayfire's session after any wayfire install/upgrade restores
+# /usr/share/wayland-sessions/wayfire.desktop. Keeps "Kiro Wayfire" the only selectable wayfire entry.
+# See /usr/bin/kiro-wayfire-hide-upstream-session.
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Path
+Target = usr/share/wayland-sessions/wayfire.desktop
+
+[Action]
+Description = Hiding upstream wayfire session (Kiro Wayfire is the supported entry)...
+When = PostTransaction
+Exec = /usr/bin/kiro-wayfire-hide-upstream-session

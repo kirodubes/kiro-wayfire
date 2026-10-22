@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Kiro Wayfire
+Comment=Kiro Wayfire edition (wayfire + waybar, 3D effects)
+Exec=kiro-wayfire-session
+TryExec=kiro-wayfire-session
+Type=Application
+DesktopNames=Wayfire;wlroots
