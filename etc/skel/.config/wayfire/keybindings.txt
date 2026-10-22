@@ -1,6 +1,7 @@
 ###############################################################################
 #  KEYBINDINGS — wayfire
 #  Source: etc/skel/.config/wayfire.ini
+#  Reference for the default bindings. Changed yours? Edit this file to match.
 #  Kiro wayfire edition — SUPER-based grammar ported from kiro-hyprland.
 ###############################################################################
 
@@ -10,7 +11,7 @@
   ctrl + alt + Return     Terminal
   ctrl + alt + T          Terminal
   super + shift + Return  File manager
-  super + E               Code editor
+  super + E               Editor (Sublime Text)
   super + D               Launch apps (fuzzel)
   super + Space           Launch apps (fuzzel)
   super + shift + D       Run launcher (rofi)
@@ -25,6 +26,7 @@
   ctrl + alt + E          Tweak tool
   ctrl + alt + F          Firefox
   ctrl + alt + G          Chromium
+  ctrl + alt + H          Kirotux Wayfire Premium
   ctrl + alt + I          Kiro ISO builder
   ctrl + alt + M          USB image writer
   ctrl + alt + O          Opera
@@ -38,7 +40,7 @@
   ctrl + alt + End        System monitor
   ctrl + shift + Escape   System monitor
   super + F1              Firefox
-  super + F2              Code editor
+  super + F2              Editor (Sublime Text)
   super + F3              Inkscape
   super + F4              GIMP
   super + F5              Meld

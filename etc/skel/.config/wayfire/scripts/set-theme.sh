@@ -64,7 +64,9 @@ if [ -f "$MAKO_CONFIG" ]; then
 fi
 
 # ── wayfire.ini — borders + workspace/cube/expo backgrounds (auto-reloads) ────
-if [ -f "$WAYFIRE_INI" ]; then
+# Skipped once Kirotux Wayfire Premium has saved a look (its record file exists): the
+# app owns these colours then, and pywal would undo them at every login.
+if [ -f "$WAYFIRE_INI" ] && [ ! -f "$HOME/.config/wayfire/kirotux-appearance.ini" ]; then
     accent_f="$(hex2float "$color4")"
     muted_f="$(hex2float "$color8")"
     bg_f="$(hex2float "$background")"
