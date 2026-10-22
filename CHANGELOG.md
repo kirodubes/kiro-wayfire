@@ -37,7 +37,7 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - Qt apps get the KvGnomeDark Kvantum theme: the session runs `kiro-kvantum-default` at start.
 - btop (Ctrl+Alt+End) is slightly transparent, like the terminal.
 - `import-gsettings.sh` (every login) keeps a **Light** choice instead of forcing dark, and copies the cursor size
-  into gsettings.
+  into gsettings. Its header comment said "Hyprland session" (copied from kiro-hyprland); it says wayfire now.
 - wayfire's `ipc` and `ipc-rules` plugins are on, for the premium app.
 - pywal (`set-theme.sh`) leaves the window border and background colours in `wayfire.ini` alone once the premium
   app has saved a look, so its choice survives the next login.

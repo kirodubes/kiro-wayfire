@@ -9,7 +9,7 @@
 #   Import GTK appearance from ~/.config/gtk-3.0/settings.ini into the
 #   org.gnome.desktop.interface gsettings schema (theme, icons, cursor,
 #   font), so GTK4/libadwaita apps and tools that read gsettings pick up
-#   the Kiro look on a Hyprland (Wayland) session.
+#   the Kiro look in the wayfire (Wayland) session.
 # Why:
 #   On Wayland there is no xsettings daemon; many apps read gsettings
 #   instead of settings.ini, so we mirror the .ini values into gsettings
