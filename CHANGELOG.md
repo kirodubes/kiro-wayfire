@@ -3,6 +3,47 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.10.22
+
+### What Changed
+- **Ready for the KiroTux Wayfire ISO**: the fixes the other KiroTux editions got while becoming a product.
+- **The keyboard layout follows the installer.** `xkb_layout = us,be` was fixed, so a user who picked German in
+  Calamares still typed US/Belgian. At login a new script puts the installer's layout (and variant) from
+  `/etc/vconsole.conf` into the user's `wayfire.ini`, the same way the niri editions do. A layout the user changed
+  is left alone; the live ISO is unchanged.
+- **Ctrl+Alt+H opens Kirotux Wayfire Premium** when it is installed; otherwise a notification with a **Get KiroTux**
+  button that opens the KiroTux page. The key did nothing before.
+- **Super+E and Super+F2 open Sublime Text** (`subl`); they started `code`, which the KiroTux ISOs don't ship.
+- Qt apps get the KvGnomeDark Kvantum theme: the session runs `kiro-kvantum-default` at start.
+- btop (Ctrl+Alt+End) is slightly transparent, like the terminal.
+- `import-gsettings.sh` (every login) keeps a **Light** choice instead of forcing dark, and copies the cursor size
+  into gsettings.
+- wayfire's `ipc` and `ipc-rules` plugins are on, for the premium app.
+- pywal (`set-theme.sh`) leaves the window border and background colours in `wayfire.ini` alone once the premium
+  app has saved a look, so its choice survives the next login.
+- `keybindings.txt`: header line, Ctrl+Alt+H, editor rows.
+- These are new installs only: existing users keep their `~/.config` copy.
+
+### Technical Details
+- `keyboard-from-installer.sh` only replaces the untouched line `xkb_layout = us,be` and adds `xkb_variant` when
+  the installer set one; no stamp, so it works again after `skell`. Tested on a copy with `XKBLAYOUT="de"` +
+  `XKBVARIANT="nodeadkeys"`, and a second run changes nothing.
+- It runs in the same autostart entry as `set-theme.sh`, before it: both rewrite `wayfire.ini`, and two writers
+  at once could lose one edit.
+- Ctrl+Alt+H calls `scripts/premium.sh` instead of an inline `sh -c`, because of the quoting in a `.ini` value.
+- The premium app's record file is `~/.config/wayfire/kirotux-appearance.ini`; `set-theme.sh` skips its
+  `wayfire.ini` block while that file exists (waybar and mako still follow pywal).
+- Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
+  and this edition uses wayfire's own session, so there is no wrapper to export them from.
+
+### Files Modified
+- `etc/skel/.config/wayfire.ini`
+- `etc/skel/.config/wayfire/keybindings.txt`
+- `etc/skel/.config/wayfire/scripts/import-gsettings.sh`
+- `etc/skel/.config/wayfire/scripts/set-theme.sh`
+- `etc/skel/.config/wayfire/scripts/keyboard-from-installer.sh` (new)
+- `etc/skel/.config/wayfire/scripts/premium.sh` (new)
+
 ## 2026.10.10
 
 ### What Changed
