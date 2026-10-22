@@ -44,6 +44,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - **Fisheye removed** (the `[fisheye]` section, Super+Ctrl+F in `keybindings.txt`, and the `wayfire-plugins-extra`
   optdepend). wayfire 0.11 moved fisheye out of core into `wayfire-plugins-extra`, and chaotic-aur/cachyos still
   carry its 0.10 build, which doesn't load on 0.11, so the key did nothing.
+- **pywal theming never ran**: `set-theme.sh` was committed without the executable bit (mode 644 since June), so
+  the `[autostart] theme` line and the Variety Alt+Shift keys could not start it, and colours stayed Tokyo Night
+  (found on a QEMU install: no `~/.cache/wal`). The file is executable now (git mode 100755); new installs only.
 - Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
   and this edition uses wayfire's own session, so there is no wrapper to export them from.
 - The cursor fix is `etc/profile.d/kiro-wayfire-vm-cursor.sh`: SDDM's `wayland-session` sources `/etc/profile`
