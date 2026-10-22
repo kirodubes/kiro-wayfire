@@ -27,11 +27,15 @@ WAYFIRE_INI="$HOME/.config/wayfire.ini"
 command -v wal >/dev/null 2>&1 || { echo "pywal (wal) not installed — skipping theme"; exit 0; }
 [ -f "$WALLPAPER" ] || { echo "Wallpaper not found: $WALLPAPER"; exit 0; }
 
-# Generate the palette. -n: do not set the wallpaper (swaybg owns that). -q: quiet.
-wal -i "$WALLPAPER" -n -q
+# Generate the palette. -n: do not set the wallpaper (swaybg owns that). -e: skip pywal's own
+# gtk/xrdb reload (no X display here). -q: quiet.
+wal -i "$WALLPAPER" -n -e -q
 
+# pywal's colors.sh reads unset variables ($FZF_DEFAULT_OPTS), which set -u would make fatal
+set +u
 # shellcheck source=/dev/null
 source "$CACHE"   # exports $background $foreground $cursor $color0 … $color15
+set -u
 
 # #rrggbb → "r g b 1.0" (wayfire's float-RGBA colour format).
 hex2float() {

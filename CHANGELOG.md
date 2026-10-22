@@ -47,6 +47,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - **pywal theming never ran**: `set-theme.sh` was committed without the executable bit (mode 644 since June), so
   the `[autostart] theme` line and the Variety Alt+Shift keys could not start it, and colours stayed Tokyo Night
   (found on a QEMU install: no `~/.cache/wal`). The file is executable now (git mode 100755); new installs only.
+  Once it ran, it stopped right after `wal`: it runs under `set -u` and sources pywal's `colors.sh`, which reads the
+  unset `$FZF_DEFAULT_OPTS`. It now sources that file with `set +u`, and calls `wal -e` (no xrdb/GTK reload: there is
+  no X display). Checked on the QEMU install: borders, waybar and mako took the wallpaper's colours.
 - Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
   and this edition uses wayfire's own session, so there is no wrapper to export them from.
 - The cursor fix is `etc/profile.d/kiro-wayfire-vm-cursor.sh`: SDDM's `wayland-session` sources `/etc/profile`
