@@ -6,6 +6,12 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.10.22
 
 ### What Changed
+- **The terminal follows the wallpaper's colours too.** pywal recoloured waybar, mako and the borders, but Alacritty
+  kept its built-in colours: pywal 3.3 has no Alacritty template and the edition ships no Alacritty config.
+  `set-theme.sh` now writes the palette to `~/.cache/wal/colors-alacritty.toml`, and when you have no
+  `~/.config/alacritty/alacritty.toml` it creates a small one that imports it. Alacritty reloads by itself, so open
+  terminals change with Alt+Shift+N and at login. An existing `alacritty.toml` (yours or kiro-dot-files') is left
+  alone. Tested on the QEMU install: the palette is rewritten on Alt+Shift+N and imported.
 - **Own session "Kiro Wayfire" with the Qt variables.** Qt apps now get `QT_QPA_PLATFORMTHEME=gtk3` (tray icons, file
   dialogs) and `QT_STYLE_OVERRIDE=kvantum` (the KvGnomeDark look), like every other edition. wayfire.ini can't set
   environment variables, so a small wrapper, `kiro-wayfire-session`, exports them and starts wayfire with the same
