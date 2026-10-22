@@ -2,7 +2,7 @@
   // Kiro wayfire bar — same layout/feel as kiro-hyprland. wayfire has no native
   // waybar workspace module, so the center of the left side uses wlr/taskbar
   // (running windows); workspaces are driven by wayfire's expo overview (tap
-  // SUPER) + SUPER+1..9. The app-drawer icon opens nwg-drawer (big icon grid) —
+  // SUPER) + SUPER+1..9. The app-drawer icon opens the rofi Kiro-Grid app grid —
   // a visual complement to fuzzel (SUPER+D), which stays the fast keyboard launcher.
   "layer": "top",
   "position": "top",

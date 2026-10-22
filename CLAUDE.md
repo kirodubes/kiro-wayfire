@@ -12,15 +12,13 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   launchers; window management lives in the plugin sections.
 - **Desktop shell:** **waybar + mako + swaybg** — the same stack as kiro-hyprland (wayfire is
   wlroots, so it ports almost directly). This is the deliberate "re-converge the line" choice.
-- **Launchers: fuzzel (keyboard) + nwg-drawer (visual grid), not plain rofi.** `SUPER+D`/`SUPER+
-  Space`/`SUPER+F11`/`F12` open **fuzzel** (fast, Wayland-native, themed Tokyo Night — found via
-  community precedent in multiple `~/Public` niri/sway/river rices, not just wayfire). The waybar
-  top-left icon (`` U+F0BAF, nf-md-apps) opens **nwg-drawer** via
-  `~/.config/wayfire/scripts/app-drawer.sh` — a 5-column, 96px-icon, Surfn-themed app grid sized
-  to the center 60%×70% of the *actual* output resolution (computed at runtime from `wlr-randr`,
-  not hardcoded — the values were tuned live on a 1920x1080 display but the script scales).
-  `rofi` stays for `SUPER+SHIFT+D` (run launcher) and `SUPER+R`/`ALT+R` (theme selector) — no
-  fuzzel/nwg-drawer equivalent for those.
+- **Launchers: fuzzel (keyboard) + rofi Kiro-Grid (visual grid).** `SUPER+D`/`SUPER+Space`/`SUPER+F11`/`F12`
+  open **fuzzel** (fast, Wayland-native, themed Tokyo Night). The waybar top-left icon (U+F0BAF, nf-md-apps) runs
+  `~/.config/wayfire/scripts/app-drawer.sh`: rofi 2.0 (native Wayland) with the **`Kiro-Grid`** theme from
+  `kiro-rofi-themes` — a centered 750px card, 5 columns x 3 rows of 64px Surfn icons with names (adi1090x launcher
+  type-3 style-1). A second click closes it. It replaced nwg-drawer on 2026-10-22 (sleeker, no extra package).
+  The card is 85% opaque so it reads without blur; `[blur] blur_by_default` also matches `app_id contains "rofi"`
+  for the frosted look. `rofi` also covers `SUPER+SHIFT+D` (run) and `SUPER+R`/`ALT+R` (theme selector).
 - **Autostart:** wayfire's `[autostart]` table (`name = command`, run via `/bin/sh -c` — pipes &
   `[ ]` work, unlike Hyprland's exec_cmd). `autostart_wf_shell = false` so wf-panel doesn't fight
   waybar. XDG-autostart-only items (`xdg-user-dirs-update`) added by hand.

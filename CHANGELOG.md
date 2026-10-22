@@ -22,6 +22,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - pywal (`set-theme.sh`) leaves the window border and background colours in `wayfire.ini` alone once the premium
   app has saved a look, so its choice survives the next login.
 - `keybindings.txt`: header line, Ctrl+Alt+H, editor rows.
+- **New app grid.** The apps icon top-left in waybar now opens a sleek centered grid: 5 big icons with their
+  names per row on a dark glass card, search on top (rofi with the new `Kiro-Grid` theme from kiro-rofi-themes).
+  It replaces nwg-drawer there. Click the icon again to close it; fuzzel stays on Super+D.
 - These are new installs only: existing users keep their `~/.config` copy.
 - **Mouse fixed in a QEMU VM.** The pointer was drawn away from where clicks landed, so the Calamares buttons
   could not be clicked. In a VM the wayfire session now uses a software cursor (`WLR_NO_HARDWARE_CURSORS=1`,
@@ -57,6 +60,14 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   `XDG_SESSION_DESKTOP` starts with `Wayfire` and `systemd-detect-virt -q` succeeds, so other sessions are left
   alone. The X screen matched the 1280x800 output, so this was not the niri stale-X-screen click bug. Tested live
   in the QEMU virtio-gpu (virgl) VM: wayfire's environment has the variable and the Calamares buttons click.
+- App grid: `app-drawer.sh` runs `rofi -show drun -theme Kiro-Grid -icon-theme Surfn` (rewritten to the Kiro
+  bash template); if rofi is already open it closes it, so the waybar icon toggles. rofi 2.0 in `[extra]` is native
+  Wayland (it replaced `rofi-wayland`), so no package is added. The theme is adi1090x launcher type-3 style-1
+  with its colours inlined and the card at 85% opacity, so it reads without blur. `[blur] blur_by_default` now
+  also matches `app_id contains "rofi"` for the frosted look (`contains` covers however wayfire names the
+  layer-shell surface). Escape and the toggle's pkill end rofi with a non-zero code, so the call is `|| true`.
+  Tested live in the installed Wayfire QEMU VM: the grid opens as a native Wayland window (grim screenshot),
+  the second click closes it, and the script exits 0.
 
 ### Files Modified
 - `etc/skel/.config/wayfire.ini`
@@ -66,6 +77,8 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - `etc/skel/.config/wayfire/scripts/keyboard-from-installer.sh` (new)
 - `etc/skel/.config/wayfire/scripts/premium.sh` (new)
 - `etc/profile.d/kiro-wayfire-vm-cursor.sh` (new)
+- `etc/skel/.config/wayfire/scripts/app-drawer.sh` (nwg-drawer → rofi Kiro-Grid)
+- `etc/skel/.config/waybar/config-wayfire.jsonc` (comment)
 - `CLAUDE.md`
 - `KIRO-PKG-BUILD-APPS/kiro-wayfire/PKGBUILD` (wlsunset depends, plugins-extra optdepend dropped)
 
