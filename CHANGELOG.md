@@ -23,6 +23,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   app has saved a look, so its choice survives the next login.
 - `keybindings.txt`: header line, Ctrl+Alt+H, editor rows.
 - These are new installs only: existing users keep their `~/.config` copy.
+- **Mouse fixed in a QEMU VM.** The pointer was drawn away from where clicks landed, so the Calamares buttons
+  could not be clicked. In a VM the wayfire session now uses a software cursor (`WLR_NO_HARDWARE_CURSORS=1`,
+  which the Hyprland editions already set). Real hardware is unchanged. This one reaches existing installs too.
 
 ### Technical Details
 - `keyboard-from-installer.sh` only replaces the untouched line `xkb_layout = us,be` and adds `xkb_variant` when
@@ -43,6 +46,11 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   carry its 0.10 build, which doesn't load on 0.11, so the key did nothing.
 - Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
   and this edition uses wayfire's own session, so there is no wrapper to export them from.
+- The cursor fix is `etc/profile.d/kiro-wayfire-vm-cursor.sh`: SDDM's `wayland-session` sources `/etc/profile`
+  before it starts wayfire, for every login shell including fish. It exports the variable only when
+  `XDG_SESSION_DESKTOP` starts with `Wayfire` and `systemd-detect-virt -q` succeeds, so other sessions are left
+  alone. The X screen matched the 1280x800 output, so this was not the niri stale-X-screen click bug. Tested live
+  in the QEMU virtio-gpu (virgl) VM: wayfire's environment has the variable and the Calamares buttons click.
 
 ### Files Modified
 - `etc/skel/.config/wayfire.ini`
@@ -51,6 +59,7 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 - `etc/skel/.config/wayfire/scripts/set-theme.sh`
 - `etc/skel/.config/wayfire/scripts/keyboard-from-installer.sh` (new)
 - `etc/skel/.config/wayfire/scripts/premium.sh` (new)
+- `etc/profile.d/kiro-wayfire-vm-cursor.sh` (new)
 - `CLAUDE.md`
 - `KIRO-PKG-BUILD-APPS/kiro-wayfire/PKGBUILD` (wlsunset depends, plugins-extra optdepend dropped)
 

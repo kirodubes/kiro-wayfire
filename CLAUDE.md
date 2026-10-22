@@ -64,6 +64,10 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   source, no `#id`), so `window { padding: ... }` in `drawer.css` is silently ignored by GTK3 —
   target `window > box` instead for inner padding.
 
+- **VM cursor:** `etc/profile.d/kiro-wayfire-vm-cursor.sh` sets `WLR_NO_HARDWARE_CURSORS=1` for wayfire in a
+  VM only. Without it, QEMU virtio-gpu draws the pointer away from where clicks land (Calamares unclickable).
+  wayfire has no env setting in `wayfire.ini`; SDDM's wayland-session sources `/etc/profile`, so profile.d works.
+
 ## Build / delivery
 - Source-of-truth for the config; delivered as the `kiro-wayfire` package via
   `~/KIRO-PKG-BUILD-APPS/kiro-wayfire/build.sh` (public recipe → `~/EDU/nemesis_repo/`). After
