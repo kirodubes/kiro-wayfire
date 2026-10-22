@@ -53,6 +53,13 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   Once it ran, it stopped right after `wal`: it runs under `set -u` and sources pywal's `colors.sh`, which reads the
   unset `$FZF_DEFAULT_OPTS`. It now sources that file with `set +u`, and calls `wal -e` (no xrdb/GTK reload: there is
   no X display). Checked on the QEMU install: borders, waybar and mako took the wallpaper's colours.
+- **Super+Q closes the window on AZERTY keyboards too.** wayfire binds keys by position (keycode), not by letter, and
+  has no option to change that (Hyprland has `resolve_binds_by_sym`, niri binds by letter), so on a Belgian install
+  Super+Q sat on the key labelled A. When the first layout is `be` or `fr`, `keyboard-from-installer.sh` now moves the
+  shipped bindings on those letters to the AZERTY positions at login: close window (Super+Q, Super+Shift+Q), always
+  on top (Super+Shift+A), the Variety selector (Alt+W) and the USB writer (Ctrl+Alt+M). Bindings that already list
+  both keys (Ctrl+Alt+A/Q, Ctrl+Alt+W/Z) stay. Only untouched shipped lines change, so a second run does nothing.
+  Tested on copies (be, fr, us, already-`be` home) and on the QEMU install: wayfire loaded `<super> KEY_A`.
 - Not ported: `QT_QPA_PLATFORMTHEME` / `QT_STYLE_OVERRIDE`. wayfire has no environment setting in `wayfire.ini`
   and this edition uses wayfire's own session, so there is no wrapper to export them from.
 - The cursor fix is `etc/profile.d/kiro-wayfire-vm-cursor.sh`: SDDM's `wayland-session` sources `/etc/profile`
