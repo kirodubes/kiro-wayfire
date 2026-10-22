@@ -6,7 +6,12 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.10.22
 
 ### What Changed
-- **Variety + recolour works on every wallpaper, with the right colours.** Two fixes, found on two real machines:
+- **The Alt+Shift keys work: layouts switch with both Ctrl keys now.** `xkb_options` had `grp:alt_shift_toggle`, so
+  Alt+Shift switched the keyboard layout before wayfire saw the keys, and every Alt+Shift binding fell through to
+  plain Alt: Alt+Shift+N changed the wallpaper (Alt+N) but never recoloured. The layout toggle is
+  `grp:ctrls_toggle` (left + right Ctrl together). Existing users get it at the next login (only the untouched shipped
+  line changes).
+- **Variety + recolour works on every wallpaper, with the right colours.** Two more fixes, found on two real machines:
   - The theme now uses **pywal16** (`python-pywal16`), the maintained fork of pywal. The old pywal 3.3 (archived
     upstream) gave up on flat wallpapers with few colours and then nothing was recoloured (about 1 in 25 Variety
     wallpapers). pywal16 recoloured all 40 test wallpapers and the failing one; `set-theme.sh` is unchanged.
@@ -51,6 +56,12 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   which the Hyprland editions already set). Real hardware is unchanged. This one reaches existing installs too.
 
 ### Technical Details
+- Alt+Shift: proven on a bare-metal install by a uinput key press (Alt, Shift, N). With the toggle, only
+  `variety --next` (the Alt+N command) started; with `xkb_options = compose:caps`, the `sh -c … set-theme.sh` command
+  did. `keyboard-from-installer.sh` gains `layout_switch_keys`, which swaps the exact shipped line for the
+  `grp:ctrls_toggle` one (idempotent, a second run changes nothing; checked). Super+Space is taken (drun), so
+  `grp:win_space_toggle` was not an option. The premium app's live test ran the command string directly, so it
+  never saw this; the other Kiro Wayland editions ship the same `grp:alt_shift_toggle` and are not checked yet.
 - pywal 3.3's imagemagick backend needs 16 distinct colours and exits 1 when it can't find them; `set-theme.sh` runs
   under `set -e`, so it stopped before waybar, Alacritty and the borders. The package's dependency moves to
   `python-pywal16` (built from its AUR recipe into nemesis_repo). It

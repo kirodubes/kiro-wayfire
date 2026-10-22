@@ -60,5 +60,16 @@ azerty_binds() {
     if cmp -s "$tmp" "$INI"; then rm -f "$tmp"; else mv "$tmp" "$INI"; fi
 }
 
+layout_switch_keys() {
+    # grp:alt_shift_toggle (shipped until 2026-10-22) made Alt+Shift switch layouts inside xkb, so wayfire never saw
+    # the Shift and every <alt> <shift> binding (the Variety recolour keys) fell through to plain Alt. Both Ctrl
+    # keys switch layouts now. Only the untouched shipped line changes.
+    local tmp="$INI.tmp.$$"
+    awk '$0 == "xkb_options = grp:alt_shift_toggle,compose:caps" { print "xkb_options = grp:ctrls_toggle,compose:caps"; next }
+        { print }' "$INI" > "$tmp"
+    if cmp -s "$tmp" "$INI"; then rm -f "$tmp"; else mv "$tmp" "$INI"; fi
+}
+
 set_layout
 azerty_binds
+layout_switch_keys
