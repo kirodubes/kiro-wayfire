@@ -32,7 +32,7 @@
   ctrl + alt + O          Opera
   ctrl + alt + P          Package manager
   ctrl + alt + Q          Alacritty tweak tool
-  ctrl + alt + S          Tweak tool
+  ctrl + alt + S          Fish tweak tool
   ctrl + alt + U          Volume control
   ctrl + alt + V          Vivaldi
   ctrl + alt + W          Fastfetch tweak tool
@@ -55,6 +55,7 @@
 ── 2. Window Management ───────────────────────────────────────────────────────
   super + Q               Close window
   super + shift + Q       Close window
+  alt + F4                Close window
   super + shift + Space   Toggle floating / tiled
   super + F               Fullscreen
   super + alt + F         Maximize
@@ -71,7 +72,11 @@
   alt + Tab               Next window
   alt + shift + Tab       Previous window
   super + Tab             Fast switcher
+  super + shift + Tab     Fast switcher (backwards)
   super + ctrl + O        Next monitor
+  super + ctrl + shift + O  Move window to next monitor
+  super + ctrl + right-click  Rotate window
+  super + ctrl + R        Reset window rotation
 
 ── 3. Workspaces / Tags / Groups ──────────────────────────────────────────────
   super + 1..9            Workspace 1..9  (AZERTY: same physical keys)
@@ -128,6 +133,8 @@
   ctrl + alt + L          Logout settings
   ctrl + alt + R          Lockscreen wallpaper
   super + shift + R       Reload theme (waybar + mako)
-  super + ctrl + alt + Left/Right   Cube — 3D workspace showcase
+  ctrl + alt + Left/Right  Cube — 3D workspace showcase
+  ctrl + alt + left-click  Cube — drag to rotate
   super + ctrl + I        Invert colours
   super + alt + B         Toggle blur
+  left ctrl + right ctrl  Switch keyboard layout

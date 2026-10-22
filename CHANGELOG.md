@@ -11,6 +11,10 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   plain Alt: Alt+Shift+N changed the wallpaper (Alt+N) but never recoloured. The layout toggle is
   `grp:ctrls_toggle` (left + right Ctrl together). Existing users get it at the next login (only the untouched shipped
   line changes).
+- **keybindings.txt checked against wayfire.ini**: the layout switch is listed; the cube keys are Ctrl+Alt+Left/Right
+  (+ Ctrl+Alt+left-click), not Super+Ctrl+Alt; Ctrl+Alt+S is the Fish tweak tool; added Alt+F4, Super+Shift+Tab,
+  Super+Ctrl+Shift+O, and window rotation (Super+Ctrl+right-click, Super+Ctrl+R). Every row parses for the premium
+  app's Keys page (two spaces between key and description).
 - **Variety + recolour works on every wallpaper, with the right colours.** Two more fixes, found on two real machines:
   - The theme now uses **pywal16** (`python-pywal16`), the maintained fork of pywal. The old pywal 3.3 (archived
     upstream) gave up on flat wallpapers with few colours and then nothing was recoloured (about 1 in 25 Variety
