@@ -29,7 +29,18 @@ command -v wal >/dev/null 2>&1 || { echo "pywal (wal) not installed — skipping
 
 # Generate the palette. -n: do not set the wallpaper (swaybg owns that). -e: skip pywal's own
 # gtk/xrdb reload (no X display here). -q: quiet.
-wal -i "$WALLPAPER" -n -e -q
+# Light or dark follows the GTK colour scheme (Kirotux Wayfire Premium's Look page sets it): pywal -l makes a
+# light palette. Light only when the scheme asks for it, or is unset with a light GTK theme, so the shipped
+# adw-gtk3-dark desktop never turns light by itself.
+LIGHT=()
+if command -v gsettings >/dev/null 2>&1; then
+    scheme="$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || true)"
+    gtk_theme="$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null || true)"
+    if [ "$scheme" = "'prefer-light'" ] || { [ "$scheme" = "'default'" ] && [[ "$gtk_theme" != *-dark* ]]; }; then
+        LIGHT=(-l)
+    fi
+fi
+wal -i "$WALLPAPER" -n -e -q "${LIGHT[@]}"
 
 # pywal's colors.sh reads unset variables ($FZF_DEFAULT_OPTS), which set -u would make fatal
 set +u

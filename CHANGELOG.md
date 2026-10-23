@@ -3,6 +3,17 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.10.23
+
+### What Changed
+- **Light style works on the whole desktop.** Picking Light (in Kirotux Wayfire Premium, or a light GTK theme) changed only the GTK apps: waybar, mako, the window borders and Alacritty stayed dark, because pywal always made a dark palette. `set-theme.sh` now makes a light palette when the desktop is set to light, at every login and every recolour. New installs only; existing users copy `~/.config/wayfire/scripts/set-theme.sh` from `/etc/skel` (or run `skell`).
+
+### Technical Details
+- `set-theme.sh` reads `org.gnome.desktop.interface color-scheme` and `gtk-theme` with gsettings and adds pywal's `-l` (light colorscheme) when the scheme is `prefer-light`, or `default` with a GTK theme that is not a `-dark` one. The shipped `adw-gtk3-dark` / `prefer-dark` stays dark. Tested on riker (RTX 2060): light gives background `#f3f3f2`/`#f5f7f8`, dark back to `#253c4b`, mako and waybar follow.
+
+### Files Modified
+- `etc/skel/.config/wayfire/scripts/set-theme.sh`
+
 ## 2026.10.22
 
 ### What Changed
