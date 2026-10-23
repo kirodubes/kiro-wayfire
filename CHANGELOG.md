@@ -8,10 +8,12 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ### What Changed
 - **Light style works on the whole desktop.** Picking Light (in Kirotux Wayfire Premium, or a light GTK theme) changed only the GTK apps: waybar, mako, the window borders and Alacritty stayed dark, because pywal always made a dark palette. `set-theme.sh` now makes a light palette when the desktop is set to light, at every login and every recolour. New installs only; existing users copy `~/.config/wayfire/scripts/set-theme.sh` from `/etc/skel` (or run `skell`).
 - **Alt+N recolours too, like the DMS and noctalia editions.** Alt+N/P/T/F (and Alt+Right/Left) only changed the wallpaper; the colours followed only with Alt+Shift. Now both recolour waybar, mako, the window borders and Alacritty about 3 seconds after the new wallpaper, as on the other KiroTux editions, where the shell recolours from every wallpaper. New installs only; existing users copy the four `command_wall_next/prev/trash/fav` lines from `/etc/skel/.config/wayfire.ini` (or run `skell`).
+- **Blur on/off for a window works.** Super+Alt+B never did anything. Blur is now switched per window with **Super+Alt + middle-click** on the window. New installs only; existing users change the `[blur]` `toggle` line in `~/.config/wayfire.ini` (or run `skell`).
 
 ### Technical Details
 - `set-theme.sh` reads `org.gnome.desktop.interface color-scheme` and `gtk-theme` with gsettings and adds pywal's `-l` (light colorscheme) when the scheme is `prefer-light`, or `default` with a GTK theme that is not a `-dark` one. The shipped `adw-gtk3-dark` / `prefer-dark` stays dark. Tested on riker (RTX 2060): light gives background `#f3f3f2`/`#f5f7f8`, dark back to `#253c4b`, mako and waybar follow.
 - `wayfire.ini`: `command_wall_next/prev/trash/fav` run the same `sh -c 'variety --…; sleep 3; set-theme.sh "$(variety --get)"'` as their `_recolor` twins; keybindings.txt says "+ pywal recolor" for them. Tested on riker with real key presses (uinput): every Alt+N gave a new wallpaper with a new Alacritty palette and waybar colours.
+- wayfire 0.11's blur `toggle` is a `type="button"` option ("toggle blurring for a specific window", the one under the pointer), so `<super> <alt> KEY_B` was ignored since the first config (f84defe). Now `<super> <alt> BTN_MIDDLE`, free in wayfire.ini and next to Super+Alt + scroll (window opacity); keybindings.txt follows. Tested on riker (RTX 2060). Same box: cube and expo run without stutter on NVIDIA.
 
 ### Files Modified
 - `etc/skel/.config/wayfire/scripts/set-theme.sh`
