@@ -106,12 +106,12 @@
   XF86MonBrightnessDown   Brightness down
 
 ── 6b. Wallpaper (Variety) ────────────────────────────────────────────────────
-  alt + N                 Next wallpaper
-  alt + Right             Next wallpaper
-  alt + P                 Previous wallpaper
-  alt + Left              Previous wallpaper
-  alt + T                 Trash wallpaper
-  alt + F                 Favorite wallpaper
+  alt + N                 Next wallpaper + pywal recolor
+  alt + Right             Next wallpaper + pywal recolor
+  alt + P                 Previous wallpaper + pywal recolor
+  alt + Left              Previous wallpaper + pywal recolor
+  alt + T                 Trash wallpaper + pywal recolor
+  alt + F                 Favorite wallpaper + pywal recolor
   alt + Up                Pause wallpaper
   alt + Down              Resume wallpaper
   alt + W                 Wallpaper selector
