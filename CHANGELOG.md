@@ -3,6 +3,24 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.10.24
+
+### What Changed
+- **New keybindings from ohmychadwm, where the key was free:** Super+K keybindings cheatsheet, Super+Shift+F file manager, Super+Shift+B browser (Firefox), Super+Shift+M Spotify, Super+Ctrl+Shift+A AI agent (`claude` in Alacritty), Super+Ctrl+A volume control, Super+Ctrl+L lock screen (hyprlock), the mic-mute key and Alt+volume keys for 1% steps (`wpctl`). Super+Shift+N stays minimize. New installs only (skel). Existing users: copy the new and changed `binding_*`/`command_*` lines in `[command]` from `/etc/skel/.config/wayfire.ini` into `~/.config/wayfire.ini`.
+
+### Technical Details
+- Keys for commands that already existed are added as `|` alternatives on their existing binding (`binding_files`, `binding_volume`, `binding_keybindings`, `binding_firefox`), the way `binding_terminal` already carries four chords. New commands get their own `binding_*` + `command_*` pair (`spotify`, `ai_agent`, `lock`, `volume_up_fine`/`volume_down_fine`, `micmute`).
+- Lock runs `loginctl lock-session`, so it goes through hypridle's `lock_cmd` (hyprlock) and honours a Kirotux Wayfire Premium `hypridle.conf`.
+- wayfire binds by keycode, so `keyboard-from-installer.sh` (`azerty_binds`) now also moves the three new A/M chords for Belgian/French layouts: Super+Ctrl+A and Super+Ctrl+Shift+A to `KEY_Q`, Super+Shift+M to `KEY_SEMICOLON` (same mapping as Ctrl+Alt+M). It still matches exact default lines only, so a user's own edits are never touched.
+- `keybindings.txt` updated in the same commit; duplicate-chord scan adds no new duplicates, on the US/BE skel and on a simulated Belgian first login.
+- Tested on the RTX 2060 test box (fresh KiroTux Wayfire v26.10.23, Belgian layout) with real key presses: all 10 keys work.
+
+### Files Modified
+- `etc/skel/.config/wayfire.ini`
+- `etc/skel/.config/wayfire/keybindings.txt`
+- `etc/skel/.config/wayfire/scripts/keyboard-from-installer.sh`
+- `CHANGELOG.md`
+
 ## 2026.10.23
 
 ### What Changed

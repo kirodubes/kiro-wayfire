@@ -56,6 +56,10 @@ azerty_binds() {
         $0 == "toggle_always_on_top = <super> <shift> KEY_A" { print "toggle_always_on_top = <super> <shift> KEY_Q"; next }
         $0 == "binding_wall_selector = <alt> KEY_W" { print "binding_wall_selector = <alt> KEY_Z"; next }
         $0 == "binding_usbwriter = <ctrl> <alt> KEY_M" { print "binding_usbwriter = <ctrl> <alt> KEY_SEMICOLON"; next }
+        $0 == "binding_volume = <super> KEY_V | <ctrl> <alt> KEY_U | <super> <ctrl> KEY_A" {
+            print "binding_volume = <super> KEY_V | <ctrl> <alt> KEY_U | <super> <ctrl> KEY_Q"; next }
+        $0 == "binding_ai_agent = <super> <ctrl> <shift> KEY_A" { print "binding_ai_agent = <super> <ctrl> <shift> KEY_Q"; next }
+        $0 == "binding_spotify = <super> <shift> KEY_M" { print "binding_spotify = <super> <shift> KEY_SEMICOLON"; next }
         { print }' "$INI" > "$tmp"
     if cmp -s "$tmp" "$INI"; then rm -f "$tmp"; else mv "$tmp" "$INI"; fi
 }
