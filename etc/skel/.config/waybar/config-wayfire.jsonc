@@ -1,14 +1,13 @@
 {
-  // Kiro wayfire bar — same layout/feel as kiro-hyprland. wayfire has no native
-  // waybar workspace module, so the center of the left side uses wlr/taskbar
-  // (running windows); workspaces are driven by wayfire's expo overview (tap
-  // SUPER) + SUPER+1..9. The app-drawer icon opens the rofi Kiro-Grid app grid —
+  // Kiro wayfire bar — same layout/feel as kiro-hyprland. Workspaces 1..9 come from waybar's
+  // native wayfire/workspaces module (wayfire IPC: needs the ipc + ipc-rules plugins); click a
+  // number or press SUPER+1..9. The app-drawer icon opens the rofi Kiro-Grid app grid —
   // a visual complement to fuzzel (SUPER+D), which stays the fast keyboard launcher.
   "layer": "top",
   "position": "top",
-  "height": 24,
+  "height": 26,
   "spacing": 6,
-  "modules-left": ["custom/launcher", "wlr/taskbar"],
+  "modules-left": ["custom/launcher", "wayfire/workspaces"],
   "modules-center": ["clock"],
   "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
 
@@ -17,12 +16,8 @@
     "tooltip-format": "Applications",
     "on-click": "~/.config/wayfire/scripts/app-drawer.sh"
   },
-  "wlr/taskbar": {
-    "format": "{icon}",
-    "icon-size": 16,
-    "tooltip-format": "{title}",
-    "on-click": "activate",
-    "on-click-middle": "close"
+  "wayfire/workspaces": {
+    "format": "{icon}"
   },
   "clock": {
     "format": "{:%a %d %b  %H:%M}",

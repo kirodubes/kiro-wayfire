@@ -50,14 +50,14 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
 - **wayfire colours are float-RGBA** (`r g b a`, 0–1), not hex — `set-theme.sh` converts.
 - wayfire **watches wayfire.ini and live-reloads on save**, which is why `set-theme.sh` can patch
   the border/background colours in place with no explicit reload command.
-- **No native waybar workspace module** for wayfire — the bar uses `wlr/taskbar`; workspaces are
-  surfaced by the expo overview (tap SUPER) + SUPER+1..9. A custom IPC workspace module is a
-  documented future enhancement.
+- **waybar workspaces = native `wayfire/workspaces`** (2026-10-26, waybar 0.13+): shows 1..9 for the 3x3 vswitch grid,
+  clickable, and follows SUPER+1..9. It talks wayfire IPC, so `ipc` + `ipc-rules` must stay in `plugins =`.
+  `wlr/taskbar` was dropped (Erik doesn't want app icons; it never worked anyway, since `foreign-toplevel` isn't loaded).
+  Bar height 26 (the module's minimum).
 - **cube is loaded but bound to CTRL+ALT+drag** — a showcase, not the everyday switcher (vswitch).
 - **Validated on a real wayfire boot** (picard, real-metal, 2026-07-01): installed via `pacman`,
-  confirmed waybar/`wlr/taskbar` render correctly, fuzzel launches and themes correctly. (The one
-  issue hit — no workspace pills in waybar — was expected/by-design, not a bug; see the "No native
-  waybar workspace module" note below.)
+  confirmed waybar renders correctly, fuzzel launches and themes correctly. Workspace numbers in waybar
+  were added later (2026-10-26, tested on picard).
 - **nwg-drawer is gone** (2026-10-22): the app grid is rofi Kiro-Grid, so the dependency and the
   `~/.config/nwg-drawer/` skel folder were dropped (−41 MiB on the ISO).
 - **Own session** (2026-10-22): `kiro-wayfire.desktop` ("Kiro Wayfire") runs `/usr/bin/kiro-wayfire-session`, which

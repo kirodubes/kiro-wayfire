@@ -3,6 +3,21 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.10.26
+
+### What Changed
+- **Workspace numbers on the bar:** waybar now shows workspaces 1 to 9. Click a number to switch, or press Super+1..9 as before; the current workspace is highlighted. The running-app icons next to them are gone. New installs only (skel). Existing users: copy `/etc/skel/.config/waybar/config-wayfire.jsonc` to `~/.config/waybar/` and restart waybar.
+
+### Technical Details
+- Uses waybar's native `wayfire/workspaces` module (waybar 0.13+), which talks wayfire IPC: the `ipc` and `ipc-rules` plugins are already loaded. The existing `#workspaces` styling in the shared waybar `style.css` covers it.
+- `wlr/taskbar` removed: it showed no icons on wayfire, because the `foreign-toplevel` plugin isn't loaded ("Failed to register as toplevel manager").
+- Bar height 24 → 26, the minimum waybar needs with the new module (removes the height warning).
+- Tested live on a test box (wayfire 0.11, waybar 0.15).
+
+### Files Modified
+- `etc/skel/.config/waybar/config-wayfire.jsonc`
+- `CLAUDE.md`
+
 ## 2026.10.24
 
 ### What Changed
