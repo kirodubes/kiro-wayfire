@@ -18,7 +18,10 @@
 
 set -euo pipefail
 
-WALLPAPER="${1:-$HOME/.config/wayfire/bg/kiro.jpg}"
+# No argument (login): the last wallpaper pywal themed from, so a Variety pick survives a re-login.
+LAST_WALLPAPER="$(cat "$HOME/.cache/wal/wal" 2>/dev/null || true)"
+[ -f "$LAST_WALLPAPER" ] || LAST_WALLPAPER="$HOME/.config/wayfire/bg/kiro.jpg"
+WALLPAPER="${1:-$LAST_WALLPAPER}"
 CACHE="$HOME/.cache/wal/colors.sh"
 WAYBAR_COLORS="$HOME/.config/waybar/colors.css"
 MAKO_CONFIG="$HOME/.config/mako/config"
@@ -145,7 +148,8 @@ if [ -f "$WAYFIRE_INI" ]; then
 fi
 
 # ── Reload the live surfaces ──────────────────────────────────────────────────
-pkill -SIGUSR2 waybar 2>/dev/null || true   # waybar reloads its CSS on SIGUSR2
+# waybar reloads colors.css itself (reload_style_on_change): a SIGUSR2 reload crashes waybar 0.15
+# while its wayfire/workspaces module holds the IPC.
 makoctl reload 2>/dev/null || true
 # wayfire watches wayfire.ini and reloads it automatically on save.
 

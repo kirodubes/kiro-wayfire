@@ -3,6 +3,25 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.10.29
+
+### What Changed
+- **Waybar no longer disappears when the colours change.** Changing the wallpaper (Variety or Kirotux Wayfire Premium) runs pywal, and the bar used to crash and stay gone until you started `waybar` by hand. Super+Shift+R (reload) crashed it the same way; it now restarts the bar. Reported by a user, reproduced on a test box.
+- **A Variety wallpaper now survives a re-login, colours included.** Login used to start from the shipped `kiro.jpg` every time. It now starts from the last wallpaper pywal themed from, and falls back to `kiro.jpg` when there is none.
+- New installs only (skel). Existing users: copy `/etc/skel/.config/waybar/config-wayfire.jsonc` and `/etc/skel/.config/wayfire/scripts/set-theme.sh` to the same place under `~/.config/`, and copy the `wallpaper =` (`[autostart]`) and `command_reload =` lines from `/etc/skel/.config/wayfire.ini` into `~/.config/wayfire.ini`.
+
+### Technical Details
+- waybar 0.15.0 aborts on a SIGUSR2 reload while its `wayfire/workspaces` module holds the wayfire IPC (`Json::RuntimeError: Exceeded stackLimit in readValue()`). Without IPC the same reload works.
+- `config-wayfire.jsonc` sets `"reload_style_on_change": true`, so waybar reloads its CSS when the `@import`ed `colors.css` changes. This was pixel-tested on the bar. `set-theme.sh` no longer signals waybar.
+- `command_reload` kills waybar and starts it again instead of sending SIGUSR2.
+- pywal records the wallpaper it themed from in `~/.cache/wal/wal`. With no argument, `set-theme.sh` and the `[autostart]` `wallpaper` line both read it. A Premium-saved wallpaper still writes its own explicit lines, and those win.
+- kiro-variety-config's `set_wallpaper_kiro` now calls `set-theme.sh` on Wayfire.
+
+### Files Modified
+- `etc/skel/.config/waybar/config-wayfire.jsonc`
+- `etc/skel/.config/wayfire.ini`
+- `etc/skel/.config/wayfire/scripts/set-theme.sh`
+
 ## 2026.10.26
 
 ### What Changed

@@ -3,6 +3,8 @@
   // native wayfire/workspaces module (wayfire IPC: needs the ipc + ipc-rules plugins); click a
   // number or press SUPER+1..9. The app-drawer icon opens the rofi Kiro-Grid app grid —
   // a visual complement to fuzzel (SUPER+D), which stays the fast keyboard launcher.
+  // set-theme.sh rewrites colors.css; waybar picks it up by itself (a SIGUSR2 reload crashes 0.15).
+  "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
   "height": 26,
