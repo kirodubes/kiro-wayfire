@@ -3,6 +3,16 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.01
+
+### The waybar clock follows the system language
+
+**What Changed.** The clock in the bar showed English day and month names ("Sun 01 Nov") on every system, whatever language was chosen. It now uses the system's date format, so a French system shows "dim. 01 nov.". Found in the KiroTux language test on a French and a Japanese install.
+
+**Technical Details.** waybar formats the clock with C++ `std::format`, which ignores the locale for `%a`/`%b` unless the format carries the `L` flag: `{:%a %d %b  %H:%M}` → `{:L%a %d %b  %H:%M}`. waybar takes the language from `LC_TIME`, which Calamares writes from the region chosen at install. Tested live on a wayfire install: `L` + `LC_TIME=fr_FR.UTF-8` gave "dim. 01 nov.", either one alone stayed English. Only `/etc/skel` changes, so existing users keep their own `~/.config/waybar` (run `skell` or add the `L` by hand).
+
+**Files Modified.** `etc/skel/.config/waybar/config-wayfire.jsonc`, `CHANGELOG.md`
+
 ## 2026.10.29
 
 ### What Changed
