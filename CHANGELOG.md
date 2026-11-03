@@ -3,6 +3,19 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.03
+
+### What Changed
+- Ctrl+Alt+H's `scripts/premium.sh` now hands over to `kiro-premium-hint wayfire` (kiro-wayland-dotfiles): the
+  notification about the premium app is translated in 13 languages.
+
+### Technical Details
+- `premium.sh` stays as a one-line wrapper because existing `wayfire.ini` copies point `command_premium` at it;
+  the logic and text now live once in kiro-wayland-dotfiles.
+
+### Files Modified
+- etc/skel/.config/wayfire/scripts/premium.sh
+
 ## 2026.11.01
 
 ### The waybar clock follows the system language

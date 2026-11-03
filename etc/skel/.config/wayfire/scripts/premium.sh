@@ -15,11 +15,6 @@
 
 set -euo pipefail
 
-if command -v kirotux-wayfire-premium >/dev/null 2>&1; then
-    exec kirotux-wayfire-premium
-fi
-
-answer=$(notify-send -a Kirotux -i preferences-desktop-theme -A get='Get KiroTux' 'Get Kirotux Wayfire Premium' \
-    'Theme, window look, wallpaper and keyboard in one app. Comes with the KIROTUX ISOs.' || true)
-[ "$answer" = "get" ] && exec xdg-open https://kiroproject.be/kirotux.html
-exit 0
+# The logic and its translated notification live in kiro-premium-hint (kiro-wayland-dotfiles), shared by
+# every KiroTux edition; this script stays because existing wayfire.ini copies point Ctrl+Alt+H here.
+exec kiro-premium-hint wayfire
