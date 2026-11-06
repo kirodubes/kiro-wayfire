@@ -47,7 +47,7 @@ main() {
     else
         log_section "Opening the Kiro-Grid app grid"
         # Escape (exit 1) and the toggle's pkill (143) are normal ways to close it, not errors
-        rofi -show drun -theme Kiro-Grid -icon-theme Surfn || true
+        rofi -show drun -theme Kiro-Grid -icon-theme Surfn-Kiro || true
     fi
     log_success "$(basename "$0") done"
 }

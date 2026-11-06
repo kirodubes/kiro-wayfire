@@ -3,6 +3,19 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.06
+
+### What Changed
+- **The app launchers use Surfn Kiro icons**: fuzzel and the rofi app drawer.
+
+### Technical Details
+- `fuzzel.ini` `icon-theme` and `app-drawer.sh` `-icon-theme` → Surfn-Kiro.
+
+### Files Modified
+- `etc/skel/.config/fuzzel/fuzzel.ini`
+- `etc/skel/.config/wayfire/scripts/app-drawer.sh`
+- `CHANGELOG.md`
+
 ## 2026.11.03
 
 ### What Changed
