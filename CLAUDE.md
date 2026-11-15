@@ -27,6 +27,8 @@ line (sibling to [kiro-hyprland](../kiro-hyprland/CLAUDE.md)). Public, open-core
   This differs from kiro-hyprland (static Tokyo Night) and niri (noctalia/matugen).
 - **Lock/idle:** hyprlock + hypridle (wlroots-compatible), reusing kiro-hyprland's `hyprlock.conf`
   + the betterlockscreen blur cache. `session-lock` is in the plugin list so the protocol is live.
+  **Screen off is wayfire's own `[idle] dpms_timeout = 900`** (15 min, wakes on input), not hypridle:
+  wlr-randr 0.5 rejects `--output '*'`, so the shared hypridle.conf's old wlr-randr line never worked.
 - **Dependencies:** everything from Arch `extra` — **nothing into `nemesis_repo`**.
   `wayfire-plugins-extra` is left out (2026-10-22): wayfire 0.11 moved fisheye there, but chaotic-aur/cachyos still
   ship its 0.10 build, which doesn't load on 0.11. pixdecor (rounded corners)

@@ -3,6 +3,25 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.15
+
+### What Changed
+- The screen now turns off after 15 minutes idle, like XFCE. It never turned off before: the shared hypridle.conf
+  called `wlr-randr --output '*' --off`, which wlr-randr 0.5 refuses ("unknown output *"). A key or mouse move wakes
+  it, without a lock screen.
+
+### Technical Details
+- `wayfire.ini` `[idle]`: `dpms_timeout = 900` (was -1). wayfire's idle plugin does the screen-off itself, the same
+  key the Kirotux Wayfire Premium Power page writes. The `wlr-randr` fallback is gone from kiro-wayland-dotfiles'
+  hypridle.conf; hypridle on wayfire now only locks before sleep.
+- Tested on picard (KiroTux wayfire, after `skell`): `wlr-randr --output '*' --off` = rc 1, screen stays on;
+  `dpms_timeout = 20` set live = black at 20 s, then back to 900.
+- Reaches new installs only (`/etc/skel`); existing installs get it with `skell`.
+
+### Files Modified
+- `etc/skel/.config/wayfire.ini`
+- `CLAUDE.md`
+
 ## 2026.11.06
 
 ### What Changed
