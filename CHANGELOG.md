@@ -3,6 +3,21 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.16
+
+### What Changed
+- **First login opens Kirotux Wayfire Premium's Welcome page, once, when the premium app is installed.** wayfire
+  does not run `/etc/xdg/autostart`, so the app's first-login entry needs a line here. Nothing happens without the
+  app, on the live ISO, or after the first time (the app keeps its own mark).
+
+### Technical Details
+- `[autostart] premium_welcome = sh -c '[ -d /run/archiso/bootmnt ] || ! command -v kirotux-wayfire-premium
+  >/dev/null || exec kirotux-wayfire-premium --first-login'`. New installs only (skel); existing users keep their
+  wayfire.ini.
+
+### Files Modified
+- `etc/skel/.config/wayfire.ini`, `CHANGELOG.md`
+
 ## 2026.11.15
 
 ### What Changed
