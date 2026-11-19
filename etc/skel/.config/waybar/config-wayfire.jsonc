@@ -11,7 +11,7 @@
   "spacing": 6,
   "modules-left": ["custom/launcher", "wayfire/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "battery", "tray"],
 
   "custom/launcher": {
     "format": " 󰮯 ",

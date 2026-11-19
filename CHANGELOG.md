@@ -3,6 +3,22 @@
 All notable changes to **kiro-wayfire** are documented here.
 Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 
+## 2026.11.19
+
+### What Changed
+- **No IP address on the bar** (Erik: "remove the ip from the bar - keep code but remove it from bar"): on a wired
+  connection the `network` module showed the IP address, which ends up in every screenshot and video. `network` is
+  out of `modules-right`; its definition stays in the file, so adding the name back restores it.
+
+### Technical Details
+- Only the module list changed. Existing users keep their own `~/.config/waybar/config-wayfire.jsonc` copy.
+- Checked on a QEMU wayfire install: waybar restarted (not SIGUSR2, which crashes waybar on wayfire), bar shows
+  volume, CPU, memory, battery and tray.
+
+### Files Modified
+- etc/skel/.config/waybar/config-wayfire.jsonc
+- CHANGELOG.md
+
 ## 2026.11.16
 
 ### What Changed
