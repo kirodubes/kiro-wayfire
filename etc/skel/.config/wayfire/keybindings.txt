@@ -92,6 +92,7 @@
   super + ctrl + up       Workspace up
   super + ctrl + down     Workspace down
   super (tap)             Expo — workspace overview
+  top-left corner         Expo — push the pointer in and wait half a second
   super + S               Scale — window overview
   3-finger swipe          Switch workspace
 

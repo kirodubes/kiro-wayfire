@@ -6,16 +6,24 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.11.19
 
 ### What Changed
+- **Hot corner on by default** (Erik: "should be on and we should be able to turn it off via our app"): pushing the
+  pointer into the top-left corner for half a second opens expo, the overview of all workspaces and windows. Tapping
+  SUPER still works. Kirotux Wayfire Premium turns it off or moves it (Mouse & Touchpad → Hot corner).
 - **No IP address on the bar** (Erik: "remove the ip from the bar - keep code but remove it from bar"): on a wired
   connection the `network` module showed the IP address, which ends up in every screenshot and video. `network` is
   out of `modules-right`; its definition stays in the file, so adding the name back restores it.
 
 ### Technical Details
+- `[expo] toggle = <super> | hotspot top-left 10x10 500`: wf-config activators take several triggers joined by `|`;
+  the size is needed (`10 500` alone is ignored). wayfire reports it over IPC as `left-top`. Same line the premium
+  app writes, checked live on wayfire 0.11 in a QEMU install. Only new installs get it (skel).
 - Only the module list changed. Existing users keep their own `~/.config/waybar/config-wayfire.jsonc` copy.
 - Checked on a QEMU wayfire install: waybar restarted (not SIGUSR2, which crashes waybar on wayfire), bar shows
   volume, CPU, memory, battery and tray.
 
 ### Files Modified
+- etc/skel/.config/wayfire.ini
+- etc/skel/.config/wayfire/keybindings.txt
 - etc/skel/.config/waybar/config-wayfire.jsonc
 - CHANGELOG.md
 
