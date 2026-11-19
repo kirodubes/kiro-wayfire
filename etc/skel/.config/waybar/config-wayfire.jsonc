@@ -9,7 +9,7 @@
   "position": "top",
   "height": 26,
   "spacing": 6,
-  "modules-left": ["custom/launcher", "wayfire/workspaces"],
+  "modules-left": ["custom/launcher", "wayfire/workspaces#wf"],
   "modules-center": ["clock"],
   "modules-right": ["pulseaudio", "cpu", "memory", "battery", "tray"],
 
@@ -18,7 +18,8 @@
     "tooltip-format": "Applications",
     "on-click": "~/.config/wayfire/scripts/app-drawer.sh"
   },
-  "wayfire/workspaces": {
+  // "#wf" gives the widget a wf class: style.css underlines workspaces with windows on this bar only
+  "wayfire/workspaces#wf": {
     "format": "{icon}"
   },
   "clock": {

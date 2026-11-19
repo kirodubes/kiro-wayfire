@@ -6,6 +6,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
 ## 2026.11.19
 
 ### What Changed
+- **Bar shows which workspaces have windows** (Erik: "show in the bar that there is an app open via coloring or
+  underline of the number … only wayfire"): every workspace number with windows on it is brighter and underlined in
+  the theme's accent colour; empty ones stay dim.
 - **Hot corner on by default** (Erik: "should be on and we should be able to turn it off via our app"): pushing the
   pointer into the top-left corner for half a second opens expo, the overview of all workspaces and windows. Tapping
   SUPER still works. Kirotux Wayfire Premium turns it off or moves it (Mouse & Touchpad → Hot corner).
@@ -14,6 +17,9 @@ Format: one dated entry per day (`YYYY.MM.DD`), newest first.
   out of `modules-right`; its definition stays in the file, so adding the name back restores it.
 
 ### Technical Details
+- The module is now `wayfire/workspaces#wf`: the `#wf` suffix gives the widget a `wf` class, so the rule in
+  kiro-wayland-dotfiles' shared style.css (`#workspaces.wf button:not(.empty)`) styles this bar only. waybar 0.16's
+  wayfire module marks a workspace without windows `.empty`. Checked on the QEMU install.
 - `[expo] toggle = <super> | hotspot top-left 10x10 500`: wf-config activators take several triggers joined by `|`;
   the size is needed (`10 500` alone is ignored). wayfire reports it over IPC as `left-top`. Same line the premium
   app writes, checked live on wayfire 0.11 in a QEMU install. Only new installs get it (skel).
